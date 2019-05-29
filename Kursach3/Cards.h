@@ -1,7 +1,6 @@
 #pragma once
-#include <vector>
 class Cards {
-private:
+protected:
 	int rang;
 	int suit;
 	bool trump;

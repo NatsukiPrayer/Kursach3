@@ -13,6 +13,4 @@ Cards::Cards(int r, int s, bool t)
 }
 
 void Cards::beat(Cards c1)
-{
-
-}
+{}
