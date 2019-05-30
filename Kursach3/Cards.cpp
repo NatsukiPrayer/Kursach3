@@ -5,8 +5,15 @@ Cards::Cards()
 {}
 
 Cards::Cards(int r, int s, bool t)
-	:rang(r), trump(t)
+	:trump(t)
 {
+	if (r >= 9)
+		rang = 9;
+	else if (r <= 0)
+		rang = 0;
+	else
+		rang = r;
+
 	if (s >= 3)
 		suit = 3;
 	else if (s <= 0)

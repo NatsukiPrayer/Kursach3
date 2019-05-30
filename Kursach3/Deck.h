@@ -4,9 +4,11 @@
 
 class Deck : public Cards {
 private:
+	int trump_suit;
 	std::vector <Cards> deck;
 public:
 	Deck();
 	void deck_init();
 	void shuffle();
+	void trump_init();
 };

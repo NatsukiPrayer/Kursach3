@@ -27,3 +27,13 @@ void Deck::shuffle()
 	auto rng = std::default_random_engine{};
 	std::shuffle(std::begin(this->deck), std::end(this->deck), rng);
 }
+
+void Deck::trump_init()
+{
+	int s = std::size(this->deck);
+	for (int i=0; i<s; i++)
+	 {
+		if (this->deck.at(i).suit == this->trump_suit)
+			this->deck.at(i).trump = true;
+	}
+}
