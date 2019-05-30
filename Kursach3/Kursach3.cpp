@@ -10,8 +10,9 @@
 using namespace std;
 
 int main()
-
 {
+	Deck iDeck;
+	iDeck.deck_init();
 	std::vector <Cards> Decky;
 	Decky.push_back(Cards(1, 1, false));
 	cout << endl;

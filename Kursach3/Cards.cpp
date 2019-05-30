@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "Cards.h"
 
+Cards::Cards()
+{}
+
 Cards::Cards(int r, int s, bool t)
 	:rang(r), trump(t)
 {
