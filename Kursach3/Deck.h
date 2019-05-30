@@ -7,6 +7,7 @@ private:
 	int trump_suit;
 	std::vector <Cards> deck;
 public:
+	friend class Cards;
 	Deck();
 	void deck_init();
 	void shuffle();
