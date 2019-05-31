@@ -2,8 +2,9 @@
 #include "Deck.h"
 #include <string>
 class Player {
-private:
+protected:
 	std::string nick;
+	bool Human;
 public:
-	friend Deck;
+	virtual bool next_turn();
 };

@@ -2,7 +2,7 @@
 #include "Cards.h"
 #include <vector>
 
-class Deck : public Cards {
+class Deck  {
 private:
 	int trump_suit;
 	std::vector <Cards> deck;

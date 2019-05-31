@@ -30,6 +30,7 @@ void Deck::shuffle()
 
 void Deck::trump_init()
 {
+	trump_suit = this->deck.at(0).suit;
 	int s = std::size(this->deck);
 	for (int i=0; i<s; i++)
 	 {
