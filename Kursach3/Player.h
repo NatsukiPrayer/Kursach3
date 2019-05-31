@@ -4,7 +4,8 @@
 class Player {
 protected:
 	std::string nick;
-	bool Human;
+	bool alive;
 public:
+	Player(std::string n, bool a);
 	virtual bool next_turn();
 };

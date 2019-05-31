@@ -1,8 +1,12 @@
 #include "pch.h"
 #include "AI.h"
 
-bool AI::next_turn()
+Ai::Ai(std::string n, bool a)
+	:Player(n, a)
 {
-	Player::next_turn();
-	return Human;
+}
+
+bool Ai::next_turn()
+{
+	return alive;
 }
