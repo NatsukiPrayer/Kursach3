@@ -8,5 +8,5 @@ Human::Human(std::string n, bool a)
 
 bool Human::next_turn()
 {
-	return alive;
+	return true;
 }

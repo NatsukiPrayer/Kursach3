@@ -29,7 +29,7 @@ int main()
 			break;
 	}
 	for (int i=0; i < ai_num; i++) {
-		bots.push_back(Ai("Bot " << i + 1, false));
+		bots.push_back(Ai("Bot", false));
 	}
 	Deck iDeck;
 	iDeck.deck_init();

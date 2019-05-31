@@ -8,5 +8,5 @@ Ai::Ai(std::string n, bool a)
 
 bool Ai::next_turn()
 {
-	return alive;
+	return false;
 }

@@ -8,4 +8,5 @@ Player::Player(std::string n, bool a)
 
 bool Player::next_turn()
 {
+	return alive;
 }
