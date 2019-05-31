@@ -5,6 +5,7 @@
 
 class Ai : public Player {
 public:
+	std::string get_name();
 	Ai(std::string n, bool a);
 	bool next_turn();
 };
