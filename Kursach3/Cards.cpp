@@ -46,12 +46,12 @@ void Cards::info()
 	else if (rang == 8)
 		std::cout << " ace of ";
 	if (suit == 0)
-		std::cout << "hearts ";
+		std::cout << "hearts " << std::endl;
 	else if (suit == 1)
-		std::cout << "spade ";
+		std::cout << "spade " << std::endl;
 	else if (suit == 2)
-		std::cout << "diamonds ";
+		std::cout << "diamonds " << std::endl;
 	else if (suit == 3)
-		std::cout << "clubs ";
+		std::cout << "clubs " << std::endl;
 
 }

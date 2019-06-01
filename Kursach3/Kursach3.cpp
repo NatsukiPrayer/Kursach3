@@ -15,8 +15,8 @@ int main()
 	string name;
 	string answer;
 	string Pl[4];
-	vector <Ai> bots;
 	int ai_num;
+	vector <Ai> bots;
 	cout << "Before we start, introduce yourself: ";
 	cin >> name;
 	cout << "So, let's our short story begin " << endl
@@ -50,7 +50,7 @@ int main()
 		<< "You've litted up another cigarette and released a small cloud of smoke from your mouth." << endl
 		<< "-Durak." << endl;
 	for (int i = 0; i < ai_num; i++) {
-		bots.push_back(Ai("Bot", false));
+		bots.push_back(Ai(("Bot" + i), false));
 		Pl[i] = bots.at(i).get_name();
 	}
 	Deck iDeck;
@@ -65,30 +65,66 @@ int main()
 		while (1) {
 			cout << "-Shuffle one more time or we could start?";
 			cin >> answer;
-			if (answer == "yes") {
-				cout << "As you want" << endl;
+			if (answer == "yes" || answer == "Yes" || answer == "Shuffle" || answer == "shuffle" || answer == "one more" || answer == "One more" || answer == "one more time" || answer == "One more time") {
+				cout << "-As you want" << endl;
 				iDeck.shuffle();
 			}
-			else if (answer == "no") {
-				cout << "And so we begin" << endl;
+			else if (answer == "no" || answer == "No" || answer == "start" || answer == "Start" || answer == "begin" || answer == "Begin") {
+				cout << "-And so we start" << endl;
+				iDeck.trump_init();
 				break;
 			}
 			else 
 				cout << "This is not <yes> and is not <no>. Answer clearer next time " << endl;
 		}
-		iDeck.trump_init();
-		while (1) {
-			int k = 0;
-			int turn_count = 0;
+			int chosen_card;
 			Deck Beated;
 			vector <Deck> Hand;
 			for (int i = 0; i < ai_num; i++) {
 				Hand.push_back(Deck());
-				for (; k<(6*(i+1) + 1); k++)
-				Hand.at(i).get_card(iDeck, (k+1));
+				for (int k = 0; k < 6; k++) {
+					Hand.at(i).get_card(iDeck, 0);
+					iDeck.card_out(0);
+				}
 			}
-			Hand.at(0).get_card_out(0).info();
-			break;
-		}
+			system("cls");
+			bool turn = true;
+			while (1) {
+				int card_count = 0;
+				int player_turn = 0;
+				system("cls");
+				cout << "Your hand:" << endl;
+				for (int i = 0; i < Hand.at(0).get_size_of_deck(); i++) {
+					cout << i << ". "; Hand.at(0).get_card_out(i).info();
+				}
+				cout << "====================================" << endl;
+				switch (iDeck.get_trump()) {
+				case 0:
+					cout << "Trump is heart " << endl;
+					break;
+				case 1:
+					cout << "Trump is spade " << endl;
+					break;
+				case 2:
+					cout << "Trump is diamond " << endl;
+					break;
+				case 3:
+					cout << "Trump is club " << endl;
+					break;
+				}
+				if (turn == true){
+					cout << "Now is your turn, choose a card to play: ";
+					cin >> chosen_card;
+					while (1) {
+						if (chosen_card > Hand.at(player_turn).get_size_of_deck || chosen_card < Hand.at(player_turn).get_size_of_deck)
+							cout << "You don't own a card under this number" << endl;
+						else
+
+					}
+						
+				}
+					
+				break;
+			}
 }
 

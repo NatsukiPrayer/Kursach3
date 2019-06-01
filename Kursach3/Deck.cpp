@@ -4,6 +4,11 @@
 #include <random>
 
 
+int Deck::get_size_of_deck()
+{
+	return deck.size();
+}
+
 Deck::Deck()
 {}
 
@@ -12,10 +17,19 @@ Cards Deck::get_card_out(int c)
 	return deck.at(c);
 }
 
+int Deck::get_trump()
+{
+	return trump_suit;
+}
+
+void Deck::card_out(int p)
+{
+	deck.erase(deck.begin() + p);
+}
+
 void Deck::get_card(Deck d1, int c)
 {
 	this->deck.push_back(d1.deck.at(c));
-	d1.deck.erase(d1.deck.begin() +(c-1));
 }
 
 void Deck::deck_init()
@@ -23,7 +37,7 @@ void Deck::deck_init()
 	for (int i = 0; i < 9; i++) {
 		this->deck.push_back(Cards(i, 0, false));
 	}
-	for (int i = 8; i < 18; i++) {
+	for (int i = 9; i < 18; i++) {
 		this->deck.push_back(Cards((i - 9), 1, false));
 	}
 	for (int i = 18; i < 27; i++) {
