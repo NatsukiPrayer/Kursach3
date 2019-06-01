@@ -4,18 +4,23 @@
 #include <random>
 
 
-Deck::Deck()
-{}
+Deck::Deck(int n)
+{
+	deck.resize(n);
+}
 
 Cards Deck::get_card_out(int c)
 {
 	return deck.at(c);
 }
 
-void Deck::get_card(Deck d1, int c)
+void Deck::get_card(Deck& d1, int l)
 {
-	this->deck.push_back(d1.deck.at(c));
-	d1.deck.erase(d1.deck.begin() +(c-1));
+	Cards *c = new Cards;
+	c = &d1.deck.at(l+2);
+	d1.deck.erase(d1.deck.begin()+l+2);
+	this->deck.push_back(*c);
+	delete c;
 }
 
 void Deck::deck_init()
@@ -23,7 +28,7 @@ void Deck::deck_init()
 	for (int i = 0; i < 9; i++) {
 		this->deck.push_back(Cards(i, 0, false));
 	}
-	for (int i = 8; i < 18; i++) {
+	for (int i = 9; i < 18; i++) {
 		this->deck.push_back(Cards((i - 9), 1, false));
 	}
 	for (int i = 18; i < 27; i++) {
@@ -33,10 +38,13 @@ void Deck::deck_init()
 		this->deck.push_back(Cards((i - 27), 3, false));
 	}
 }
+
 void Deck::shuffle()
 {
-	auto rng = std::default_random_engine{};
-	std::shuffle(std::begin(this->deck), std::end(this->deck), rng);
+	for (int i = std::rand() % 100; i <= 100; i++) {
+		for (int k = 0; k < i; k++)
+			std::random_shuffle(std::begin(this->deck), std::end(this->deck));
+	}
 }
 
 void Deck::trump_init()

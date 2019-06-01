@@ -34,13 +34,13 @@ int main()
 		}
 		else if (ai_num < 1) {
 			cout << "You blinked few times before you realized that only few moments earlier there were no one at the table, " << endl
-				<< "but now, you could swear, there are some omnics, your own eyes can't lie you twice!" << endl;
+				<< "but now, you could swear, there are some omnics, your own eyes can't lie to you twice!" << endl;
 			cin >> ai_num;
 		}
 		else
 			break;
 	}
-	cout << "After you finished your cigarette you thrown butt at floor and stepped on it. No one even" << endl
+	cout << "After you finished your cigarette you threw butt at floor and stepped on it. No one even" << endl
 		<< "tried to look at you, because someone don't even care about things happening out of their" << endl
 		<< "own world range, and the others are the same as you. How could you blame your brother? They can't." << endl
 		<< "You've taken a seat at the table with the omnics you've seen. They didn't drop a single word, but all" << endl
@@ -61,7 +61,7 @@ int main()
 		<< "Who knows. You've snuffed out the cigarette with you hand, and it was not only your's stupidity, " << endl
 		<< "oh if it could be only stupidity. You just wanted to test a feeling which divides you and these..." << endl
 		<< "Creatures. Omnic-croupier finished shuffling and stretched out his hand with the deck to you" << endl;
-	iDeck.shuffle();
+	//iDeck.shuffle();
 		while (1) {
 			cout << "-Shuffle one more time or we could start?";
 			cin >> answer;
@@ -80,14 +80,21 @@ int main()
 		while (1) {
 			int k = 0;
 			int turn_count = 0;
-			Deck Beated;
+			Deck Beated(36);
 			vector <Deck> Hand;
 			for (int i = 0; i < ai_num; i++) {
-				Hand.push_back(Deck());
-				for (; k<(6*(i+1) + 1); k++)
-				Hand.at(i).get_card(iDeck, (k+1));
+				Hand.push_back(Deck(6));
+				for (; k<(6*(i+1)); k++)
+				Hand.at(i).get_card(iDeck, k);
 			}
-			Hand.at(0).get_card_out(0).info();
+			for (int j = 0; j < 36; j++)
+				iDeck.get_card_out(j).info();
+			cout << "=================================" << endl;
+			for (int j=0; j<6; j++)
+				Hand.at(0).get_card_out(j).info();
+			cout << "=================================" << endl;
+			for (int j = 0; j < 36; j++)
+				iDeck.get_card_out(j).info();
 			break;
 		}
 }

@@ -8,9 +8,9 @@ private:
 	std::vector <Cards> deck;
 public:
 	friend class Cards;
-	Deck();
+	Deck(int);
 	Cards get_card_out(int);
-	void get_card(Deck, int);
+	void get_card(Deck&, int);
 	void deck_init();
 	void shuffle();
 	void trump_init();
