@@ -7,6 +7,12 @@
 Deck::Deck()
 {}
 
+void Deck::get_card(Deck d1, int c)
+{
+	this->deck.push_back(d1.deck.at(c));
+	d1.deck.erase(d1.deck.begin() +(c-1));
+}
+
 void Deck::deck_init()
 {
 	for (int i = 0; i < 9; i++) {
