@@ -8,6 +8,7 @@ public:
 	std::string get_name();
 	Human(std::string n, bool a);
 	bool next_turn();
+	void turn(Deck&, Deck&, int);
 };
 
 #endif // !HUMAN_H

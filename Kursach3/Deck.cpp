@@ -22,9 +22,19 @@ int Deck::get_trump()
 	return trump_suit;
 }
 
+void Deck::deck_info()
+{
+	for (int i = 0; i < deck.size(); i++) {
+		std::cout << i << ". "; deck.at(i).info();
+	}
+}
+
 void Deck::card_out(int p)
 {
-	deck.erase(deck.begin() + p);
+	if (p == 0)
+		deck.erase(deck.begin());
+	else 
+		deck.erase(deck.begin() + p);
 }
 
 void Deck::get_card(Deck d1, int c)

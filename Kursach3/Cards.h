@@ -11,4 +11,5 @@ public:
 	Cards(int r, int s, bool t);
 	void beat(Cards c1);
 	void info();
+
 };

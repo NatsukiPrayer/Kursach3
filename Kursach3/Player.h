@@ -8,5 +8,6 @@ protected:
 public:
 	std::string get_name();
 	Player(std::string n, bool a);
+	void turn(Deck&, Deck&, int);
 	virtual bool next_turn();
 };

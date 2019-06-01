@@ -16,3 +16,8 @@ bool Human::next_turn()
 {
 	return true;
 }
+
+void Human::turn(Deck &d1, Deck &d2, int p)
+{
+Player::turn(d1, d2, p);
+}

@@ -12,6 +12,7 @@ public:
 	Deck();
 	Cards get_card_out(int);
 	int get_trump();
+	void deck_info();
 	void card_out(int);
 	void get_card(Deck, int);
 	void deck_init();

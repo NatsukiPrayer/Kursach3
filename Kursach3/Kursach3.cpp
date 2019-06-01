@@ -3,10 +3,11 @@
 
 #include "pch.h"
 #include <iostream>
+#include <vector>
 #include "Cards.h"
 #include "Deck.h"
 #include "Player.h"
-#include <vector>
+#include "Human.h"
 #include "AI.h"
 using namespace std;
 
@@ -19,6 +20,7 @@ int main()
 	vector <Ai> bots;
 	cout << "Before we start, introduce yourself: ";
 	cin >> name;
+	Human MC(name, true);
 	cout << "So, let's our short story begin " << endl
 	    << "This bar isn't" << endl
 		<< "a good place to be in, but this evening you felt like someone who needed a place like" << endl
@@ -79,6 +81,7 @@ int main()
 		}
 			int chosen_card;
 			Deck Beated;
+			Deck Table;
 			vector <Deck> Hand;
 			for (int i = 0; i < ai_num; i++) {
 				Hand.push_back(Deck());
@@ -94,10 +97,9 @@ int main()
 				int player_turn = 0;
 				system("cls");
 				cout << "Your hand:" << endl;
-				for (int i = 0; i < Hand.at(0).get_size_of_deck(); i++) {
-					cout << i << ". "; Hand.at(0).get_card_out(i).info();
-				}
-				cout << "====================================" << endl;
+				Hand.at(0).deck_info();
+				cout << "Table: " << endl;
+				Table.deck_info();
 				switch (iDeck.get_trump()) {
 				case 0:
 					cout << "Trump is heart " << endl;
@@ -114,17 +116,20 @@ int main()
 				}
 				if (turn == true){
 					cout << "Now is your turn, choose a card to play: ";
-					cin >> chosen_card;
 					while (1) {
-						if (chosen_card > Hand.at(player_turn).get_size_of_deck || chosen_card < Hand.at(player_turn).get_size_of_deck)
-							cout << "You don't own a card under this number" << endl;
+						cin >> chosen_card;
+						if (chosen_card > Hand.at(player_turn).get_size_of_deck() || chosen_card < 0)
+							if (Hand.at(player_turn).get_size_of_deck() == 0)
+								cout << "Your hand is out" << endl;
+							else
+								cout << "You don't own a card under this number" << endl;
 						else
-
+							break;
 					}
-						
+					MC.turn(Table, Hand.at(0), chosen_card);
 				}
-					
-				break;
+				system("cls");
 			}
+			
 }
 
