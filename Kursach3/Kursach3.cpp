@@ -78,17 +78,17 @@ int main()
 		}
 		iDeck.trump_init();
 		while (1) {
+			int k = 0;
 			int turn_count = 0;
 			Deck Beated;
 			vector <Deck> Hand;
 			for (int i = 0; i < ai_num; i++) {
 				Hand.push_back(Deck());
-				//Hand.at(i).get_card()
+				for (; k<(6*(i+1) + 1); k++)
+				Hand.at(i).get_card(iDeck, (k+1));
 			}
-
-
-
-			
+			Hand.at(0).get_card_out(0).info();
+			break;
 		}
 }
 

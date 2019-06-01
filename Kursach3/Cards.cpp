@@ -24,3 +24,34 @@ Cards::Cards(int r, int s, bool t)
 
 void Cards::beat(Cards c1)
 {}
+
+void Cards::info()
+{
+	if (rang == 0)
+		std::cout << " six of ";
+	else if (rang == 1)
+		std::cout << " seven of ";
+	else if (rang == 2)
+		std::cout << " eight of ";
+	else if (rang == 3)
+		std::cout << " nine of ";
+	else if (rang == 4)
+		std::cout << " ten of ";
+	else if (rang == 5)
+		std::cout << " jack of ";
+	else if (rang == 6)
+		std::cout << " queen of ";
+	else if (rang == 7)
+		std::cout << " king of ";
+	else if (rang == 8)
+		std::cout << " ace of ";
+	if (suit == 0)
+		std::cout << "hearts ";
+	else if (suit == 1)
+		std::cout << "spade ";
+	else if (suit == 2)
+		std::cout << "diamonds ";
+	else if (suit == 3)
+		std::cout << "clubs ";
+
+}

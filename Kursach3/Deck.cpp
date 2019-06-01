@@ -7,6 +7,11 @@
 Deck::Deck()
 {}
 
+Cards Deck::get_card_out(int c)
+{
+	return deck.at(c);
+}
+
 void Deck::get_card(Deck d1, int c)
 {
 	this->deck.push_back(d1.deck.at(c));

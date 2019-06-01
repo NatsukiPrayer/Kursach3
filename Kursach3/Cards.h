@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 class Cards {
 protected:
 	int rang;
@@ -9,4 +10,5 @@ public:
 	Cards();
 	Cards(int r, int s, bool t);
 	void beat(Cards c1);
+	void info();
 };
