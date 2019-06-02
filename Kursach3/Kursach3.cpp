@@ -116,11 +116,14 @@ int main()
 						cout << "Trump is club " << endl;
 						break;
 					}
-					if (turn == true) {
-						MC.Pturn_con(Hand.at(player_turn), chosen_card, player_turn);
+					if ((card_count%4)==0) {
+						MC.Pturn_con(Hand.at(player_turn), chosen_card);
 						MC.turn(Table, Hand.at(player_turn), chosen_card);
-						//card_count += 1;
-						//turn = false;
+						cout << "Now you can add cards if you want to: ";
+							while (1) {
+								MC.Pturn_con(Hand.at(player_turn), chosen_card);
+								MC.add(Table, Hand.at(player_turn), chosen_card);
+							}
 					}
 					else {
 						cout << "Now you can add you can add cards if you want to: ";

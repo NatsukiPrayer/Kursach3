@@ -8,6 +8,7 @@ public:
 	std::string get_name();
 	Ai(std::string n, bool a);
 	bool next_turn();
+	bool Pturn_con(Deck);
 	void turn(Deck&, Deck&);
 };
 

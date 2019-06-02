@@ -33,13 +33,26 @@ Player::Player(std::string n, bool a)
 {
 }
 
+bool Player::Padd_con(Deck d1, Deck d2)
+{
+	for (int h = 0; h < d1.get_size_of_deck(); h++) {
+		for (int i = 0; i < d2.get_size_of_deck(); i++) {
+			if (d1.get_rng_coll(h) == d2.get_rng_coll(i))
+				return true;
+		}
+	}
+	return false;
+}
+
 void Player::Pturn_con(Deck h, int &cc)
 {
 	std::cout << "Now is your turn, choose a card to play: ";
 	while (1) {
 		std::cin >> cc;
-		if (h.get_size_of_deck() == 0)
+		if (h.get_size_of_deck() == 0) {
 			std::cout << "Your hand is out" << std::endl;
+			break;
+		}
 		else if (cc > h.get_size_of_deck() || cc < 0)
 			std::cout << "You don't own a card under this number" << std::endl;
 		else
