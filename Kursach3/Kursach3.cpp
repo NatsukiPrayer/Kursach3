@@ -82,6 +82,7 @@ int main()
 			int chosen_card;
 			Deck Beated;
 			Deck Table;
+			Deck Table_beat;
 			vector <Deck> Hand;
 			for (int i = 0; i < ai_num; i++) {
 				Hand.push_back(Deck());
@@ -95,40 +96,50 @@ int main()
 			while (1) {
 				int card_count = 0;
 				int player_turn = 0;
-				system("cls");
-				cout << "Your hand:" << endl;
-				Hand.at(0).deck_info();
-				cout << "Table: " << endl;
-				Table.deck_info();
-				switch (iDeck.get_trump()) {
-				case 0:
-					cout << "Trump is heart " << endl;
-					break;
-				case 1:
-					cout << "Trump is spade " << endl;
-					break;
-				case 2:
-					cout << "Trump is diamond " << endl;
-					break;
-				case 3:
-					cout << "Trump is club " << endl;
-					break;
-				}
-				if (turn == true){
-					cout << "Now is your turn, choose a card to play: ";
-					while (1) {
-						cin >> chosen_card;
-						if (chosen_card > Hand.at(player_turn).get_size_of_deck() || chosen_card < 0)
-							if (Hand.at(player_turn).get_size_of_deck() == 0)
-								cout << "Your hand is out" << endl;
-							else
-								cout << "You don't own a card under this number" << endl;
-						else
-							break;
+				while (1) {
+					system("cls");
+					cout << "Your hand:" << endl;
+					Hand.at(0).deck_info();
+					cout << "Table: " << endl;
+					Table.deck_info();
+					switch (iDeck.get_trump()) {
+					case 0:
+						cout << "Trump is heart " << endl;
+						break;
+					case 1:
+						cout << "Trump is spade " << endl;
+						break;
+					case 2:
+						cout << "Trump is diamond " << endl;
+						break;
+					case 3:
+						cout << "Trump is club " << endl;
+						break;
 					}
-					MC.turn(Table, Hand.at(0), chosen_card);
+					if (turn == true) {
+						cout << "Now is your turn, choose a card to play: ";
+						while (1) {
+							cin >> chosen_card;
+							if (chosen_card > Hand.at(player_turn).get_size_of_deck() || chosen_card < 0)
+								if (Hand.at(player_turn).get_size_of_deck() == 0)
+									cout << "Your hand is out" << endl;
+								else
+									cout << "You don't own a card under this number" << endl;
+							else
+								break;
+						}
+						MC.turn(Table, Hand.at(player_turn), chosen_card);
+						card_count += 1;
+						turn = false;
+					}
+					else {
+
+						cout << "Now you can add you can add cards if you want to: ";
+
+
+					}
+					system("cls");
 				}
-				system("cls");
 			}
 			
 }

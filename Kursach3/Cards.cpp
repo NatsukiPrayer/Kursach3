@@ -22,6 +22,21 @@ Cards::Cards(int r, int s, bool t)
 		suit = s;
 }
 
+int Cards::get_rang()
+{
+	return rang;
+}
+
+int Cards::get_suit()
+{
+	return suit;
+}
+
+bool Cards::get_trump()
+{
+	return trump;
+}
+
 void Cards::beat(Cards c1)
 {}
 

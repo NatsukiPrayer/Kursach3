@@ -9,6 +9,9 @@ public:
 	friend class Deck;
 	Cards();
 	Cards(int r, int s, bool t);
+	int get_rang();
+	int get_suit();
+	bool get_trump();
 	void beat(Cards c1);
 	void info();
 
