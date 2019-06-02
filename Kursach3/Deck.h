@@ -13,6 +13,7 @@ public:
 	Deck();
 	Cards get_card_out(int);
 	int get_trump();
+	void rng_coll_init();
 	void set_add_rng_coll(int);
 	int get_rng_coll(int);
 	void deck_info();

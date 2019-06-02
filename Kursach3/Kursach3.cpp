@@ -74,6 +74,7 @@ int main()
 			else if (answer == "no" || answer == "No" || answer == "start" || answer == "Start" || answer == "begin" || answer == "Begin") {
 				cout << "-And so we start" << endl;
 				iDeck.trump_init();
+				iDeck.rng_coll_init();
 				break;
 			}
 			else 
@@ -84,7 +85,7 @@ int main()
 			Deck Table;
 			Deck Table_beat;
 			vector <Deck> Hand;
-			for (int i = 0; i < ai_num; i++) {
+			for (int i = 0; i < ai_num+1; i++) {
 				Hand.push_back(Deck());
 				for (int k = 0; k < 6; k++) {
 					Hand.at(i).get_card(iDeck, 0);
@@ -92,49 +93,66 @@ int main()
 				}
 			}
 			system("cls");
+			iDeck.deck_info();
 			bool turn = true;
 			while (1) {
-				int card_count = 0;
+				int card_count = -1;
 				int player_turn = 0;
 				while (1) {
-					system("cls");
-					cout << "Your hand:" << endl;
-					Hand.at(0).deck_info();
-					cout << "Table: " << endl;
-					Table.deck_info();
-					switch (iDeck.get_trump()) {
-					case 0:
-						cout << "Trump is heart " << endl;
-						break;
-					case 1:
-						cout << "Trump is spade " << endl;
-						break;
-					case 2:
-						cout << "Trump is diamond " << endl;
-						break;
-					case 3:
-						cout << "Trump is club " << endl;
-						break;
-					}
-					if ((card_count%4)==0) {
-						MC.Pturn_con(Hand.at(player_turn), chosen_card);
-						MC.turn(Table, Hand.at(player_turn), chosen_card);
-						cout << "Now you can add cards if you want to: ";
-							while (1) {
+					for (int g = 0; g < ai_num; g++) {
+						MC.info(Table, Hand.at(0), Table_beat, iDeck);
+						if (iDeck.get_size_of_deck() > 0) {
+							if (g == 0) {
 								MC.Pturn_con(Hand.at(player_turn), chosen_card);
-								MC.add(Table, Hand.at(player_turn), chosen_card);
+								MC.turn(Table, Hand.at(player_turn), chosen_card);
+								MC.info(Table, Hand.at(0), Table_beat, iDeck);
+								card_count += 1;
 							}
+							else {
+
+							}
+						}
+						while (card_count < 6) {
+								if (MC.Padd_con(Table, Hand.at(player_turn)) == true || MC.Padd_con(Table_beat, Hand.at(player_turn)) == true) {
+									cout << "Now you can add cards if you want to: ";
+									while (MC.Padd_con(Table, Hand.at(player_turn)) == true) {
+										cin >> chosen_card;
+										MC.add(Table, Hand.at(player_turn), chosen_card);
+										MC.info(Table, Hand.at(0), Table_beat, iDeck);
+										card_count += 1;
+									}
+									cout << endl;
+									for (int h = -1; h < card_count; h++) {
+										if (bots.at(player_turn + 1).Pturn_con(Hand.at(player_turn + 1)) == true) {
+											if (bots.at(player_turn + 1).Pbeat_con(Table, Hand.at(player_turn + 1), h + 1) == true || MC.Padd_con(Table_beat, Hand.at(player_turn)) == true) {
+												int choice = std::rand() % 2;
+												if (choice == 0) {
+													bots.at(player_turn + 1).take(Table, Hand.at(player_turn + 1), Table_beat);
+													MC.info(Table, Hand.at(player_turn), Table_beat, iDeck);
+													break;
+												}
+												if (choice > 0) {
+													while ((bots.at(player_turn + 1).Pturn_con(Hand.at(player_turn + 1)) == true))
+														bots.at(player_turn + 1).beat(Table_beat, Hand.at(player_turn + 1), Table, h + 1);
+													MC.info(Table, Hand.at(0), Table_beat, iDeck);
+												}
+											}
+											else {
+												bots.at(player_turn + 1).take(Table, Hand.at(player_turn + 1), Table_beat);
+												MC.info(Table, Hand.at(0), Table_beat, iDeck);
+											}
+										}
+									}
+								}
+							else {
+							}
+							MC.info(Table, Hand.at(0), Table_beat, iDeck);
+							break;
+						}
 					}
-					else {
-						cout << "Now you can add you can add cards if you want to: ";
-						cin >> chosen_card;
-						MC.add(Table, Hand.at(player_turn), chosen_card);
-					}
-					system("cls");
+					
 				}
 			}
 			
 }
-
-
 

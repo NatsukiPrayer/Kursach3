@@ -11,6 +11,11 @@ protected:
 public:
 	std::string get_name();
 	Player(std::string n, bool a);
+	void set_state(int, bool);
+	void info(Deck, Deck, Deck, Deck);
+	virtual void global_turn();
+	bool Pbeat_con(Deck, Deck, int);
+	void take(Deck&, Deck&, Deck&);
 	bool Padd_con(Deck, Deck);
 	void Pturn_con(Deck, int&);
 	void add(Deck&, Deck&, int);

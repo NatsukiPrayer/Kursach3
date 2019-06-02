@@ -33,6 +33,78 @@ Player::Player(std::string n, bool a)
 {
 }
 
+void Player::set_state(int i, bool s)
+{
+	if (i == 0)
+		attacking = s;
+	else if (i == 1)
+		defendeing = s;
+	else
+		co_attacking = s;
+}
+
+void Player::info(Deck d1, Deck d2, Deck d3, Deck d4) {
+	system("cls");
+	switch (d4.get_trump()) {
+	case 0:
+		std::cout << "Trump is heart " << std::endl;
+		break;
+	case 1:
+		std::cout << "Trump is spade " << std::endl;
+		break;
+	case 2:
+		std::cout << "Trump is diamond " << std::endl;
+		break;
+	case 3:
+		std::cout << "Trump is club " << std::endl;
+		break;
+	}
+	std::cout << "Your hand:" << std::endl;
+	d2.deck_info();
+	std::cout << "Table: " << std::endl;
+	d1.deck_info();
+	std::cout << "Beat table:" << std::endl;
+	d3.deck_info();
+}
+
+void Player::global_turn()
+{
+}
+
+bool Player::Pbeat_con(Deck d1, Deck d2, int b)
+{
+	for (int i = 0; i < d2.get_size_of_deck(); i++) {
+		if (d2.get_card_out(i).get_trump() == true) {
+			if (d2.get_card_out(i).get_suit() == d1.get_card_out(b).get_suit()) {
+				if (d2.get_card_out(i).get_rang() > d1.get_card_out(b).get_rang())
+					return true;
+			}
+			else 
+				return true;
+		}
+		else {
+			if (d2.get_card_out(i).get_suit() == d1.get_card_out(b).get_suit()) {
+				if (d2.get_card_out(i).get_rang() > d1.get_card_out(b).get_rang())
+					return true;
+			}
+		}
+
+	}
+	return false;
+}
+
+void Player::take(Deck &d1, Deck &d2, Deck &d3)
+{
+	for (int u = 0; u < d1.get_size_of_deck(); u++) {
+		d2.get_card(d1, u);
+		d1.card_out(u);
+	}
+	for (int u = 0; u < d3.get_size_of_deck(); u++) {
+		d2.get_card(d3, u);
+		d3.card_out(u);
+	}
+}
+
 bool Player::Padd_con(Deck d1, Deck d2)
 {
 	for (int h = 0; h < d1.get_size_of_deck(); h++) {
@@ -73,11 +145,10 @@ void Player::add(Deck & d1, Deck & d2, int p)
 void Player::turn(Deck &d1, Deck &d2, int p)
 {
 	d1.get_card(d2, p);
-	d1.set_add_rng_coll(d2.get_card_out(p).get_rang());
 	d2.card_out(p);
 }
 
-void Player::beat(Deck & d1, Deck & d2, Deck & d3, int t, int b)
+void Player::beat(Deck & d1, Deck & d2, Deck & d3, int t, int b) //d1 - table_beat, d2 - hand, d3 - table
 {
 	if (d2.get_card_out(t).get_trump() == true && d3.get_card_out(b).get_trump() == false) {
 		d1.get_card(d2, t);

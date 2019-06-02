@@ -22,6 +22,12 @@ int Deck::get_trump()
 	return trump_suit;
 }
 
+void Deck::rng_coll_init()
+{
+	for (int i = 0; i < 36; i++)
+		set_add_rng_coll(deck.at(i).get_rang());
+}
+
 void Deck::set_add_rng_coll(int a)
 {
 	rang_collection.push_back(a);
@@ -42,15 +48,21 @@ void Deck::deck_info()
 
 void Deck::card_out(int p)
 {
-	if (p == 0)
+	if (p == 0) {
 		deck.erase(deck.begin());
-	else 
+		rang_collection.erase(rang_collection.begin());
+	}
+
+	else {
 		deck.erase(deck.begin() + p);
+		rang_collection.erase(rang_collection.begin() + p);
+	}
 }
 
 void Deck::get_card(Deck d1, int c)
 {
 	this->deck.push_back(d1.deck.at(c));
+	this->rang_collection.push_back(d1.deck.at(c).get_rang());
 }
 
 void Deck::deck_init()
