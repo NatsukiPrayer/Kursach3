@@ -22,6 +22,17 @@ int Deck::get_trump()
 	return trump_suit;
 }
 
+void Deck::set_add_rng_coll(int a)
+{
+	rang_collection.push_back(a);
+}
+
+int Deck::get_rng_coll(int d)
+{
+	if (d < rang_collection.size())
+		return rang_collection.at(d);
+}
+
 void Deck::deck_info()
 {
 	for (int i = 0; i < deck.size(); i++) {

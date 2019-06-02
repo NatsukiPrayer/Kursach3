@@ -21,3 +21,7 @@ void Human::turn(Deck &d1, Deck &d2, int p)
 {
 Player::turn(d1, d2, p);
 }
+
+void Human::Pturn_con(Deck h, int &cc) {
+	Player::Pturn_con(h, cc);
+}

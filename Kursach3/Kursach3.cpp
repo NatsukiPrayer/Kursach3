@@ -117,30 +117,21 @@ int main()
 						break;
 					}
 					if (turn == true) {
-						cout << "Now is your turn, choose a card to play: ";
-						while (1) {
-							cin >> chosen_card;
-							if (chosen_card > Hand.at(player_turn).get_size_of_deck() || chosen_card < 0)
-								if (Hand.at(player_turn).get_size_of_deck() == 0)
-									cout << "Your hand is out" << endl;
-								else
-									cout << "You don't own a card under this number" << endl;
-							else
-								break;
-						}
+						MC.Pturn_con(Hand.at(player_turn), chosen_card, player_turn);
 						MC.turn(Table, Hand.at(player_turn), chosen_card);
-						card_count += 1;
-						turn = false;
+						//card_count += 1;
+						//turn = false;
 					}
 					else {
-
 						cout << "Now you can add you can add cards if you want to: ";
-
-
+						cin >> chosen_card;
+						MC.add(Table, Hand.at(player_turn), chosen_card);
 					}
 					system("cls");
 				}
 			}
 			
 }
+
+
 
