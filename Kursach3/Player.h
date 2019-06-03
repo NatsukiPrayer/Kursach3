@@ -21,6 +21,6 @@ public:
 	void Pturn_con(Deck, int&);
 	void add(Deck&, Deck&, int);
 	void turn(Deck&, Deck&, int);
-	void beat(Deck&, Deck&, Deck&, int, int);
+	bool beat(Deck&, Deck&, Deck&, int, int);
 	virtual bool next_turn();
 };

@@ -93,12 +93,12 @@ int main()
 		}
 	}
 	system("cls");
+	int player_turn = 0;
 	bool turn = true;
 	while (1) {
 		while (1) {
-			int card_count = -1;
-			int player_turn = 0;
 			for (int g = 0; g < ai_num; g++) {
+				int card_count = -1;
 				MC.info(Table, Hand.at(0), Table_beat, iDeck);
 				if (iDeck.get_size_of_deck() > 0) {
 					if (g == 0) {
@@ -109,35 +109,51 @@ int main()
 							card_count += 1;
 						}
 					}
-				}
-				for (int n = 0; n < ai_num; n++) {
-					while (card_count < 6) {
+					else {
+						if (Hand.at(g).get_size_of_deck() != 0) {
+							bots.at(g).Pturn_con(Hand.at(g));
+							bots.at(g).turn(Table, Hand.at(g));
+							bots.at(g).info(Table, Hand.at(g), Table_beat, iDeck);
+							card_count += 1;
+						}
+					}
+					for (int n = 0; card_count < 6; n++) {
 						if (n == (g + 1) % 6)
 							break;
 						else {
 							if (n == 0) {
 								if (MC.Padd_con(Table, Hand.at(0)) == true || MC.Padd_con(Table_beat, Hand.at(0)) == true) {
-									cout << "Now you can add cards if you want to: ";
 									while (MC.Padd_con(Table, Hand.at(0)) == true) {
-										cin >> chosen_card;
-										MC.add(Table, Hand.at(0), chosen_card);
-										MC.info(Table, Hand.at(0), Table_beat, iDeck);
-										card_count += 1;
+										if (card_count < 6) {
+											cout << "Do you want to add cards? ";
+											while (1) {
+												cin >> answer;
+												if (answer == "yes")
+													break;
+												else
+													cout << "Don't miss nex time" << endl;
+											}
+											cin >> chosen_card;
+											MC.add(Table, Hand.at(0), chosen_card);
+											MC.info(Table, Hand.at(0), Table_beat, iDeck);
+											card_count += 1;
+										}
 									}
 								}
 
 							}
 							else {
-								if (bots.at(n).Padd_con(Table, Hand.at(0)) == true || MC.Padd_con(Table_beat, Hand.at(0)) == true) {
+								if (bots.at(n).Padd_con(Table, Hand.at(n)) == true || MC.Padd_con(Table_beat, Hand.at(0)) == true) {
 									cout << "Omnics adding cards" << endl;
-									while (bots.at(n).Padd_con(Table, Hand.at(0)) == true) {
-										MC.add(Table, Hand.at(0), chosen_card);
-										MC.info(Table, Hand.at(0), Table_beat, iDeck);
-										card_count += 1;
+									while (bots.at(n).Padd_con(Table, Hand.at(n)) == true) {
+										if (card_count < 6) {
+											bots.at(n).add(Table, Hand.at(n));
+											MC.info(Table, Hand.at(0), Table_beat, iDeck);
+											card_count += 1;
+										}
 									}
 								}
 							}
-							Hand.at(1).deck_info();
 							for (int h = -1; h < card_count; h++) {
 								if (bots.at((g + 1) % 6).Pturn_con(Hand.at((g + 1) % 6)) == true) {
 									if (bots.at((g + 1) % 6).Pbeat_con(Table, Hand.at((g + 1) % 6), h + 1) == true || MC.Padd_con(Table_beat, Hand.at(player_turn)) == true) {
@@ -148,13 +164,17 @@ int main()
 											break;
 										}
 										if (choice > 0) {
-											while ((bots.at((g + 1) % 6).Pturn_con(Hand.at((g + 1) % 6)) == true))
+											Hand.at((g + 1) % 6).deck_info();
+											while ((bots.at((g + 1) % 6).Pturn_con(Hand.at((g + 1) % 6)) == true)) {
 												bots.at((g + 1) % 6).beat(Table_beat, Hand.at((g + 1) % 6), Table, h + 1);
+												if (bots.at((g + 1) % 6).beat(Table_beat, Hand.at((g + 1) % 6), Table, h + 1) == true)
+													break;
+											}
 											MC.info(Table, Hand.at(0), Table_beat, iDeck);
 										}
-										//MC.info(Table, Hand.at(0), Table_beat, iDeck);
-										//break;
 									}
+								}
+								else {
 									bots.at((g + 1) % 6).take(Table, Hand.at((g + 1) % 6), Table_beat);
 									MC.info(Table, Hand.at(0), Table_beat, iDeck);
 									break;
@@ -162,9 +182,33 @@ int main()
 
 							}
 						}
-						Hand.at(1).deck_info();
-						system("pause");
 					}
+					cout << "Type <yes> when you want next turn to begin";
+					while (1) {
+						cin >> answer;
+						if (answer == "yes")
+							break;
+						else
+							cout << "Don't miss nex time" << endl;
+					}
+					for (int l = 0; l < Table.get_size_of_deck(); l++) {
+						Beated.get_card(Table, 0);
+						Table.card_out(0);
+					}
+					for (int l = 0; l < Table_beat.get_size_of_deck(); l++) {
+						Beated.get_card(Table_beat, 0);
+						Table_beat.card_out(0);
+					}
+					for (int l = 0; l < ai_num; l++)
+						for (int k = 0; k < (6 - Hand.at(l).get_size_of_deck()); k++) {
+							if (k < 1)
+								void;
+							else {
+								Hand.at(l).get_card(iDeck, 0);
+								iDeck.card_out(0);
+							}
+
+						}
 				}
 			}
 		}

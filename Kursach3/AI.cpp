@@ -27,10 +27,10 @@ void Ai::set_state(int i, bool s)
 	ai2.set_state(2, true);
 }*/
 
-void Ai::beat(Deck &d1, Deck &d2, Deck &d3, int b) //d1 - table_beat, d2 - hand, d3 - table
+bool Ai::beat(Deck &d1, Deck &d2, Deck &d3, int b) //d1 - table_beat, d2 - hand, d3 - table
 {
 	int t = std::rand() % d2.get_size_of_deck();
-	Player::beat(d1, d2, d3, t, b);
+	return Player::beat(d1, d2, d3, t, b);
 }
 
 void Ai::add(Deck &d1, Deck &d2)

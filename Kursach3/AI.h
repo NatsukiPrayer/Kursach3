@@ -10,7 +10,7 @@ public:
 	Ai(std::string n, bool a);
 	void set_state(int i, bool s);
 	//void global_turn_start(Human&, Ai&, Ai&);
-	void beat(Deck&, Deck&, Deck&, int); //d1 - table_beat, d2 - hand, d3 - table
+	bool beat(Deck&, Deck&, Deck&, int); //d1 - table_beat, d2 - hand, d3 - table
 	void add(Deck&, Deck&);
 	bool next_turn();
 	bool Pturn_con(Deck);

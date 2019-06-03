@@ -148,33 +148,44 @@ void Player::turn(Deck &d1, Deck &d2, int p)
 	d2.card_out(p);
 }
 
-void Player::beat(Deck & d1, Deck & d2, Deck & d3, int t, int b) //d1 - table_beat, d2 - hand, d3 - table
+bool Player::beat(Deck & d1, Deck & d2, Deck & d3, int t, int b) //d1 - table_beat, d2 - hand, d3 - table
 {
 	if (d2.get_card_out(t).get_trump() == true && d3.get_card_out(b).get_trump() == false) {
 		d1.get_card(d2, t);
 		d2.card_out(t);
+		return true;
 	}
 	else if (d2.get_card_out(t).get_trump() == true && d3.get_card_out(b).get_trump() == true) {
 		if (d2.get_card_out(t).get_rang() > d3.get_card_out(b).get_rang()) {
 			d1.get_card(d2, t);
 			d2.card_out(t);
+			return true;
 		}
-		else
+		else {
 			std::cout << "This card rang it too low" << std::endl;
+			return false;
+		}
 	}
-	else if (d2.get_card_out(t).get_trump() == false && d3.get_card_out(b).get_trump() == true)
+	else if (d2.get_card_out(t).get_trump() == false && d3.get_card_out(b).get_trump() == true) {
 		std::cout << "You can't beat trump with normal card" << std::endl;
+		return false;
+	}
 	else if (d2.get_card_out(t).get_trump() == false && d3.get_card_out(b).get_trump() == false) {
 		if (d2.get_card_out(t).get_suit() == d3.get_card_out(b).get_suit()) {
 			if (d2.get_card_out(t).get_rang() > d3.get_card_out(b).get_rang()) {
 				d1.get_card(d2, t);
 				d2.card_out(t);
+				return true;
 			}
-			else
+			else {
 				std::cout << "This card rang it too low" << std::endl;
+				return false;
+			}
 		}
-		else if (d2.get_card_out(t).get_suit() != d3.get_card_out(b).get_suit())
+		else if (d2.get_card_out(t).get_suit() != d3.get_card_out(b).get_suit()) {
 			std::cout << "You can't beat card with different suit" << std::endl;
+			return false;
+		}
 	}
 	
 }
