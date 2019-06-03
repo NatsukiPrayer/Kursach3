@@ -155,14 +155,10 @@ int main()
 										//MC.info(Table, Hand.at(0), Table_beat, iDeck);
 										//break;
 									}
-									bots.at((g + 1) % 6).take(Table, Hand.at((g + 1) % 6), Table_beat);
-									MC.info(Table, Hand.at(0), Table_beat, iDeck);
-									break;
 								}
 
 							}
 						}
-						Hand.at(1).deck_info();
 						system("pause");
 					}
 				}

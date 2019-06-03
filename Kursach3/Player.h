@@ -10,6 +10,7 @@ protected:
 	bool co_attacking;
 public:
 	std::string get_name();
+	bool add_card(Deck d1, Cards c1);
 	Player(std::string n, bool a);
 	void set_state(int, bool);
 	void info(Deck, Deck, Deck, Deck);

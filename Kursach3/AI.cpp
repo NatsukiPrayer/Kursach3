@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "AI.h"
 
+
+
 std::string Ai::get_name()
 {
 	Player::get_name();
@@ -29,6 +31,15 @@ void Ai::beat(Deck &d1, Deck &d2, Deck &d3, int b) //d1 - table_beat, d2 - hand,
 {
 	int t = std::rand() % d2.get_size_of_deck();
 	Player::beat(d1, d2, d3, t, b);
+}
+
+void Ai::add(Deck &d1, Deck &d2)
+{
+	int c = std::rand() % d2.get_size_of_deck();
+	if (add_card(d1, d2.get_card_out(c)) == true) {
+		d1.get_card(d2, c);
+		d2.card_out(c);
+	}
 }
 
 bool Ai::next_turn()

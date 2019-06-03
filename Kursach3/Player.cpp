@@ -2,7 +2,7 @@
 #include "Player.h"
 
 
-bool add_card(Deck d1, Cards c1) {
+bool Player::add_card(Deck d1, Cards c1) {
 	bool con = false;
 	int j=0;
 	while (j < d1.get_size_of_deck()) {

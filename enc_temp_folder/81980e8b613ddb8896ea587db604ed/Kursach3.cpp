@@ -162,7 +162,6 @@ int main()
 
 							}
 						}
-						Hand.at(1).deck_info();
 						system("pause");
 					}
 				}
